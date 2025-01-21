@@ -1,0 +1,166 @@
+{
+    "modelObjects": [
+        {
+            "mass": {
+                "type": "float",
+                "value": 0.001
+            },
+            "COG": {
+                "type": "vector",
+                "value": [
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            },
+            "position": {
+                "type": "vector",
+                "value": [
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            },
+            "color": {
+                "type": "intvec",
+                "value": [
+                    254,
+                    146,
+                    146
+                ]
+            },
+            "transparency": {
+                "type": "float",
+                "value": 0.0
+            }
+        },
+        {
+            "mass": {
+                "type": "float",
+                "value": 0.001
+            },
+            "COG": {
+                "type": "vector",
+                "value": [
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            },
+            "position": {
+                "type": "vector",
+                "value": [
+                    25.0,
+                    0.0,
+                    10.0
+                ]
+            },
+            "color": {
+                "type": "intvec",
+                "value": [
+                    170,
+                    230,
+                    228
+                ]
+            },
+            "transparency": {
+                "type": "float",
+                "value": 0.0
+            }
+        },
+        {
+            "position": {
+                "type": "vector",
+                "value": [
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            },
+            "dx": {
+                "type": "int",
+                "value": 1.0
+            },
+            "dy": {
+                "type": "int",
+                "value": 1.0
+            },
+            "dz": {
+                "type": "int",
+                "value": 1.0
+            },
+            "ax": {
+                "type": "int",
+                "value": 1.0
+            },
+            "ay": {
+                "type": "int",
+                "value": 1.0
+            },
+            "az": {
+                "type": "int",
+                "value": 1.0
+            }
+        },
+        {
+            "position": {
+                "type": "vector",
+                "value": [
+                    25.0,
+                    0.0,
+                    0.0
+                ]
+            },
+            "dx": {
+                "type": "int",
+                "value": 1.0
+            },
+            "dy": {
+                "type": "int",
+                "value": 1.0
+            },
+            "dz": {
+                "type": "int",
+                "value": 1.0
+            },
+            "ax": {
+                "type": "int",
+                "value": 1.0
+            },
+            "ay": {
+                "type": "int",
+                "value": 1.0
+            },
+            "az": {
+                "type": "int",
+                "value": 0.0
+            }
+        },
+        {
+            "constraint icon scale": {
+                "type": "float",
+                "value": 0.01
+            },
+            "COG marker scale": {
+                "type": "float",
+                "value": 0.01
+            },
+            "gravity_vector": {
+                "type": "vector",
+                "value": [
+                    0.0,
+                    0.0,
+                    -9810.0
+                ]
+            },
+            "background color": {
+                "type": "intvec",
+                "value": [
+                    255,
+                    255,
+                    255
+                ]
+            }
+        }
+    ]
+}
