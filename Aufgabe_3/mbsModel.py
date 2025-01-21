@@ -70,7 +70,7 @@ class mbsModel:
         for object in self.__mbsObjectList:
             object.show(renderer)
 
-    def showBodiesOnly(self, renderer):
+    def showBodiesOnly(self, renderer): 
         for object in self.__mbsObjectList:
             if object.getType() == "Body":
                 object.show(renderer)

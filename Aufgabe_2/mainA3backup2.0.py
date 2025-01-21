@@ -1,10 +1,10 @@
-from PySide6.QtWidgets import QMainWindow, QApplication, QFileDialog, QVBoxLayout, QWidget, QLabel, QStatusBar, QMenuBar, QPushButton  # Add import for QPushButton
+from PySide6.QtWidgets import QMainWindow, QApplication, QFileDialog, QVBoxLayout, QWidget, QLabel, QStatusBar, QMenuBar, QPushButton, QHBoxLayout, QComboBox  # Add import for QPushButton, QHBoxLayout, and QComboBox
 from PySide6.QtGui import QAction
 from vtkmodules.vtkRenderingCore import vtkRenderer, vtkCamera
 from vtkmodules.qt.QVTKRenderWindowInteractor import QVTKRenderWindowInteractor
 from vtkmodules.vtkRenderingAnnotation import vtkAxesActor
 from vtkmodules.vtkInteractionWidgets import vtkOrientationMarkerWidget  # Corrected import
-from vtkmodules.vtkInteractionStyle import vtkInteractorStyleTrackballCamera
+from vtkmodules.vtkInteractionStyle import vtkInteractorStyleTrackballCamera, vtkInteractorStyleJoystickCamera, vtkInteractorStyleRubberBandZoom  # Add imports for interactor styles
 from vtkmodules.vtkRenderingCore import vtkRenderWindowInteractor
 import sys
 from pathlib import Path
@@ -59,12 +59,30 @@ class MainWindow(QMainWindow):
         # Add coordinate system
         self.add_coordinate_system()
 
+        # Layout for buttons and dropdown
+        button_layout = QHBoxLayout()
+        layout.addLayout(button_layout)
+
         # Toggle Background Button
         self.toggle_bg_button = QPushButton("Toggle Background", self)
         self.toggle_bg_button.clicked.connect(self.toggle_background)
-        layout.addWidget(self.toggle_bg_button)
+        button_layout.addWidget(self.toggle_bg_button)
+
+        # Toggle Bodies Only Button
+        self.toggle_bodies_button = QPushButton("Toggle Bodies Only", self)
+        self.toggle_bodies_button.clicked.connect(self.toggle_bodies_only)
+        button_layout.addWidget(self.toggle_bodies_button)
+
+        # Interactor Style Dropdown
+        self.interactor_style_dropdown = QComboBox(self)
+        self.interactor_style_dropdown.addItem("Trackball Camera", vtkInteractorStyleTrackballCamera)
+        self.interactor_style_dropdown.addItem("Joystick Camera", vtkInteractorStyleJoystickCamera)
+        self.interactor_style_dropdown.addItem("Rubber Band Zoom", vtkInteractorStyleRubberBandZoom)
+        self.interactor_style_dropdown.currentIndexChanged.connect(self.change_interactor_style)
+        button_layout.addWidget(self.interactor_style_dropdown)
 
         self.is_black_background = True  # Initial background color state
+        self.show_bodies_only = False  # Initial state for showing bodies only
 
         self.current_model = None
 
@@ -128,6 +146,22 @@ class MainWindow(QMainWindow):
         else:
             self.renderer.SetBackground(0, 0, 0)  # Set to black
         self.is_black_background = not self.is_black_background
+        self.vtk_widget.GetRenderWindow().Render()
+
+    def toggle_bodies_only(self):
+        if self.current_model:
+            self.show_bodies_only = not self.show_bodies_only
+            self.clear_renderer()
+            if self.show_bodies_only:
+                self.current_model.showBodiesOnly(self.renderer)
+            else:
+                self.current_model.showModel(self.renderer)
+            self.vtk_widget.GetRenderWindow().Render()
+
+    def change_interactor_style(self, index):
+        style_class = self.interactor_style_dropdown.itemData(index)
+        interactor = self.vtk_widget.GetRenderWindow().GetInteractor()
+        interactor.SetInteractorStyle(style_class())
         self.vtk_widget.GetRenderWindow().Render()
 
 
